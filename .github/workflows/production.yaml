@@ -1,12 +1,22 @@
 name: Production Workflow for TG Web App
 
 on:
-  push:
+  pull_request:
+    types:
+      - closed
     branches:
       - main
-
 jobs:
+  if_merged:
+    name: Check if the pull request was merged
+    if: github.event.pull_request.merged == true
+    runs-on: self-hosted
+    steps:
+      - name: Check if PR was merged.
+        run: |
+          echo "PR WAS MERGED TO PRODUCTION. START DEPLOYMENT."
   build-and-deploy:
+    needs: if_merged
     uses: d-o-p-e/ci-cd/.github/workflows/react.yaml@main
     with:
       NODE_VERSION: 16
