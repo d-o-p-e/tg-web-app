@@ -1,9 +1,11 @@
 import React, { FC, PropsWithChildren } from 'react';
 import { blueGrey } from '@mui/material/colors';
 import { ReactComponent as KakaoLoginIcon } from '@/assets/kakao_login.svg';
-import { Avatar, Button, CardHeader } from '@mui/material';
+import { Avatar, Button, CardHeader, FormGroupClassKey } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const NavigationBar: FC<PropsWithChildren> = ({ children }) => {
+  const navigate = useNavigate();
   return (
     <>
       <nav
@@ -18,12 +20,22 @@ const NavigationBar: FC<PropsWithChildren> = ({ children }) => {
           width: '20%',
         }}
       >
-        <h1>Commited</h1>
+        <Button sx={{ color: 'white', '&:hover': { backgroundColor: blueGrey[400] } }} onClick={() => navigate('/')}>
+          <h1>Commited</h1>
+        </Button>
         <Button sx={{ width: '200px', height: '70px' }}>
           <KakaoLoginIcon />
         </Button>
         <div>
-          <Button sx={{ width: '200px', height: '70px', color: 'white', justifyContent: 'left' }}>
+          <Button
+            sx={{
+              width: '200px',
+              height: '70px',
+              color: 'white',
+              justifyContent: 'left',
+              '&:hover': { backgroundColor: blueGrey[400] },
+            }}
+          >
             <Avatar sx={{ backgroundColor: blueGrey[100] }}>R</Avatar>
             <h3 style={{ marginLeft: '20px' }}>테스트</h3>
           </Button>
