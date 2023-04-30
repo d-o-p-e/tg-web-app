@@ -16,7 +16,7 @@ export default function FeedVerticalSlider() {
         slidesPerView={1}
         mousewheel={true}
         modules={[Mousewheel, Pagination]}
-        style={{ width: '80%', height: '100%', marginLeft: '20%' }}
+        style={{ width: '80%', height: '100%' }}
       >
         <SwiperSlide style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Feed />
