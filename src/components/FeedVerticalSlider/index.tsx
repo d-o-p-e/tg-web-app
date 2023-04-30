@@ -12,12 +12,11 @@ export default function FeedVerticalSlider() {
       <Swiper
         direction={'vertical'}
         slidesPerView={1}
-        spaceBetween={-50}
         mousewheel={true}
         modules={[Mousewheel, Pagination]}
-        style={{ width: '100%', height: '100%' }}
+        style={{ width: '80%', height: '100%', marginLeft: '20%' }}
       >
-        <SwiperSlide style={{ display: 'flex', justifyContent: 'center' }}>
+        <SwiperSlide style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Feed />
         </SwiperSlide>
         <SwiperSlide style={{ display: 'flex', justifyContent: 'center' }}>
