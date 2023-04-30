@@ -1,6 +1,9 @@
 name: Production Workflow for TG Web App
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     types:
       - closed
@@ -9,8 +12,8 @@ on:
   workflow_dispatch:
 jobs:
   if_merged:
-    name: Check if the pull request was merged
-    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
+    name: Check for valid push record.
+#     if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Check if PR was merged, or Activated manually.
