@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tg-web-app
+  namespace: web-app
+spec:
+  selector:
+    matchLabels:
+      app: tg-web-app
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: tg-web-app
+    spec:
+      containers:
+        - name: tg-web-app
+          image: dopeteam/tg-web-app
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: nginx-config
+              mountPath: /etc/nginx/conf.d
+            - name: nginx-log
+              mountPath: /var/log/nginx
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: nginx-config
+        - name: nginx-log
+          emptyDir: {}
