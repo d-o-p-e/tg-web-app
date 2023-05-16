@@ -17,7 +17,9 @@ export default defineConfig({
     }),
     mkcert(),
   ],
-
+  preview: {
+    port: 5173,
+  },
   resolve: {
     alias: [{ find: '@', replacement: '/src' }],
   },
