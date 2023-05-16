@@ -15,7 +15,9 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CommentIcon from '@mui/icons-material/Comment';
-import { Grid } from '@mui/material';
+import { Box, Button, Dialog, Grid, TextField } from '@mui/material';
+import { useState } from 'react';
+import CommentDialog from '../CommentDialog';
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -33,23 +35,21 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 }));
 
 export default function Feed() {
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  const [open, setOpen] = useState(false);
+  const toggleDialog = () => {
+    setOpen((pre) => !pre);
   };
-
   return (
-    <Card sx={{ maxWidth: 700, height: 500, display: 'flex', alignItems: 'center', padding: 0 }}>
+    <Card sx={{ display: 'flex', alignItems: 'center', padding: 0 }}>
       <Grid container sx={{ height: '100%' }}>
-        <Grid item xs={8}>
+        <Grid item xs={7}>
           <img
             src="/src/assets/img.png"
             alt="Paella dish"
             style={{ height: '100%', width: '100%', objectFit: 'cover' }}
           />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={5}>
           <CardHeader
             avatar={
               <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -62,6 +62,7 @@ export default function Feed() {
               </IconButton>
             }
             title="Shrimp and Chorizo Paella"
+            subheader="2023/05/01"
           />
           <CardContent>
             <Typography variant="body2" color="text.secondary">
@@ -72,14 +73,12 @@ export default function Feed() {
               <IconButton aria-label="add to favorites">
                 <FavoriteIcon />
               </IconButton>
-              <IconButton aria-label="share">
+              <IconButton aria-label="share" onClick={toggleDialog}>
                 <CommentIcon />
               </IconButton>
-              {/* <ExpandMore expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
-              <ExpandMoreIcon />
-            </ExpandMore> */}
             </CardActions>
           </CardContent>
+          <CommentDialog open={open} toggleDialog={toggleDialog} />
         </Grid>
       </Grid>
     </Card>
