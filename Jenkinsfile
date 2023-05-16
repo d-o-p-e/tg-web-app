@@ -14,7 +14,7 @@ pipeline {
     }
     stage('Build') {
       steps {
-        withCredentials([string(credentialsId: 'kakao-client-id', variable: 'KAKAO_CLIENT_ID')]) {
+        withCredentials([string(credentialsId: 'kakao-client-ID', variable: 'KAKAO_CLIENT_ID')]) {
           sh 'docker build --build-arg KAKAO_CLIENT_ID=$KAKAO_CLIENT_ID -t dopeteam/tg-web-app:latest .'
           sh 'docker push dopeteam/tg-web-app:latest'
         }
