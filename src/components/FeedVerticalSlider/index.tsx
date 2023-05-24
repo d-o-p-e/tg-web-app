@@ -20,6 +20,9 @@ const FeedVerticalSlider: FC<FeedVerticalSliderProps> = ({ feedData = dummyData 
         direction={'vertical'}
         slidesPerView={1}
         mousewheel={true}
+        pagination={{
+          dynamicBullets: true,
+        }}
         modules={[Mousewheel, Pagination]}
         style={{ width: '80%', height: '100%' }}
       >
@@ -27,19 +30,6 @@ const FeedVerticalSlider: FC<FeedVerticalSliderProps> = ({ feedData = dummyData 
           return (
             <SwiperSlide style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <Feed feed={feed} />
-              <motion.div
-                animate={{ y: -30 }}
-                transition={{
-                  repeat: Infinity,
-                  repeatType: 'reverse',
-                  type: 'spring',
-                  damping: 10,
-                  restDelta: 0.0001,
-                }}
-                style={{ position: 'absolute', bottom: 0, left: '50%' }}
-              >
-                <KeyboardArrowDownIcon />
-              </motion.div>
             </SwiperSlide>
           );
         })}

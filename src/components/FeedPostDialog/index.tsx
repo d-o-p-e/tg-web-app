@@ -104,7 +104,7 @@ const FeedPostDialog: FC<FeedPostDialogProps> = ({ toggleDialog, open }) => {
             </RadioGroup>
           </Box>
         </Box>
-        <Button variant="contained" type="submit" sx={{ margin: 'auto', display: 'block' }}>
+        <Button variant="contained" type="submit" sx={{ margin: 'auto', display: 'block', marginBottom: '0.8rem' }}>
           작성하기
         </Button>
       </form>
