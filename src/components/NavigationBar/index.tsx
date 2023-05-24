@@ -26,7 +26,6 @@ const NavigationBar: FC<PropsWithChildren> = ({ children }) => {
           height: '100%',
           color: 'white',
           width: '20%',
-          minWidth: '200px',
         }}
       >
         <Button sx={{ color: 'white', '&:hover': { backgroundColor: blueGrey[400] } }} onClick={() => navigate('/')}>
@@ -56,6 +55,7 @@ const NavigationBar: FC<PropsWithChildren> = ({ children }) => {
               justifyContent: 'left',
               '&:hover': { backgroundColor: blueGrey[400] },
             }}
+            onClick={() => navigate('/user/1')}
           >
             <Avatar sx={{ backgroundColor: blueGrey[100] }}>R</Avatar>
             <h3 style={{ marginLeft: '20px' }}>테스트</h3>
@@ -70,6 +70,7 @@ const NavigationBar: FC<PropsWithChildren> = ({ children }) => {
               justifyContent: 'left',
               '&:hover': { backgroundColor: blueGrey[400] },
             }}
+            onClick={() => navigate('/campaign')}
           >
             <Avatar sx={{ backgroundColor: blueGrey[100] }}>
               <CelebrationIcon />
@@ -78,7 +79,7 @@ const NavigationBar: FC<PropsWithChildren> = ({ children }) => {
           </Button>
         </div>
       </nav>
-      <main style={{ width: '80%', height: '100%', marginLeft: '20%' }}>{children}</main>
+      <main style={{ width: '80%', height: '100%', marginLeft: '20%', backgroundColor: blueGrey[50] }}>{children}</main>
     </>
   );
 };

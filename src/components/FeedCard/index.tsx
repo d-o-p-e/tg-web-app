@@ -16,25 +16,19 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CommentIcon from '@mui/icons-material/Comment';
 import { Box, Button, Dialog, Grid, TextField } from '@mui/material';
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import CommentDialog from '../CommentDialog';
+import { Post } from '@/typings/post';
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
 
-const ExpandMore = styled((props: ExpandMoreProps) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
+interface FeedProps {
+  feed: Post;
+}
 
-export default function Feed() {
+export default function Feed({ feed }: FeedProps) {
   const [open, setOpen] = useState(false);
   const toggleDialog = () => {
     setOpen((pre) => !pre);
@@ -43,17 +37,13 @@ export default function Feed() {
     <Card sx={{ display: 'flex', alignItems: 'center', padding: 0 }}>
       <Grid container sx={{ height: '100%' }}>
         <Grid item xs={7}>
-          <img
-            src="/src/assets/img.png"
-            alt="Paella dish"
-            style={{ height: '100%', width: '100%', objectFit: 'cover' }}
-          />
+          <img src={feed.imageUrl} alt="Paella dish" style={{ height: '100%', width: '100%', objectFit: 'cover' }} />
         </Grid>
         <Grid item xs={5}>
           <CardHeader
             avatar={
               <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                R
+                {feed.userNickname[0]}
               </Avatar>
             }
             action={
@@ -62,12 +52,11 @@ export default function Feed() {
               </IconButton>
             }
             title="Shrimp and Chorizo Paella"
-            subheader="2023/05/01"
+            subheader={feed.createdAt}
           />
           <CardContent>
             <Typography variant="body2" color="text.secondary">
-              This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup
-              of frozen peas along with the mussels, if you like.
+              {feed.content}
             </Typography>
             <CardActions>
               <IconButton aria-label="add to favorites">

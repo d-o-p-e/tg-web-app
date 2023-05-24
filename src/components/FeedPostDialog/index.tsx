@@ -1,3 +1,4 @@
+import { postFeed } from '@/apis/feed';
 import {
   Box,
   Button,
@@ -9,6 +10,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { useMutation } from '@tanstack/react-query';
 import React, { FC, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 
@@ -19,6 +21,9 @@ interface FeedPostDialogProps {
 
 const FeedPostDialog: FC<FeedPostDialogProps> = ({ toggleDialog, open }) => {
   const [image, setImage] = useState('');
+  const [category, setCategory] = useState<'EARLY_BIRD' | 'WORKOUT' | 'ALGORITHM'>('EARLY_BIRD');
+  const [content, setContent] = useState('');
+  const { mutate } = useMutation(postFeed);
 
   const onChangeImage = (uploadedImage: File) => {
     setImage(URL.createObjectURL(uploadedImage));
@@ -27,56 +32,82 @@ const FeedPostDialog: FC<FeedPostDialogProps> = ({ toggleDialog, open }) => {
     onChangeImage(files[0]);
   };
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
+  const onChangeContent = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setContent(e.target.value);
+  };
+  const onChangeCategory = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value === 'EARLY_BIRD' || e.target.value === 'WORKOUT' || e.target.value === 'ALGORITHM') {
+      setCategory(e.target.value);
+    }
+  };
+
+  const onSubmit = (e: any) => {
+    e.preventDefault();
+    if (!image || !category || !content) return alert('모든 항목을 입력해주세요.');
+    mutate({ image, category, content });
+  };
   return (
     <Dialog onClose={toggleDialog} open={open}>
-      <Box>
-        <Box
-          {...getRootProps()}
-          sx={{
-            padding: '32px',
-            backgroundColor: '#fff',
-            zIndex: '11',
-            gap: '2rem',
-          }}
-        >
-          {image ? (
-            <img src={image} width={170} height={100} style={{ margin: 'auto', display: 'block' }} />
-          ) : (
-            <>
-              <input {...getInputProps()} />
-              {isDragActive ? (
-                <CircularProgress />
-              ) : (
-                <Box
-                  sx={{
-                    py: '22px',
-                    borderRadius: '16px',
-                    border: '3px dashed #e0e0e0',
-                    textAlign: 'center',
-                  }}
-                >
-                  <p>이미지를 드래그하거나 클릭하여 첨부해주세요.</p>
-                </Box>
-              )}
-            </>
-          )}
+      <form onSubmit={onSubmit}>
+        <Box>
+          <Box
+            {...getRootProps()}
+            sx={{
+              padding: '32px',
+              backgroundColor: '#fff',
+              zIndex: '11',
+              gap: '2rem',
+            }}
+          >
+            {image ? (
+              <img src={image} width={170} height={100} style={{ margin: 'auto', display: 'block' }} />
+            ) : (
+              <>
+                <input {...getInputProps()} />
+                {isDragActive ? (
+                  <CircularProgress />
+                ) : (
+                  <Box
+                    sx={{
+                      py: '22px',
+                      borderRadius: '16px',
+                      border: '3px dashed #e0e0e0',
+                      textAlign: 'center',
+                    }}
+                  >
+                    <p>이미지를 드래그하거나 클릭하여 첨부해주세요.</p>
+                  </Box>
+                )}
+              </>
+            )}
+          </Box>
+          <Box sx={{ width: '100%', px: '32px', mb: '32px' }}>
+            <Typography variant="h6" component="h6" sx={{ fontSize: '18px', fontWeight: 700 }}>
+              본문
+            </Typography>
+            <TextField
+              label="본문의 내용을 적어주세요"
+              multiline
+              rows={3}
+              fullWidth
+              value={content}
+              onChange={onChangeContent}
+            />
+            <Typography variant="h6" component="h6" sx={{ fontSize: '18px', fontWeight: 700, marginTop: '20px' }}>
+              카테고리
+            </Typography>
+            <RadioGroup row onChange={onChangeCategory}>
+              <FormControlLabel value="EARLY_BIRD" control={<Radio />} label="기상 미션" />
+              <FormControlLabel value="WORKOUT" control={<Radio />} label="운동" />
+              <FormControlLabel value="ALGORITHM" control={<Radio />} label="코딩 테스트" />
+            </RadioGroup>
+          </Box>
         </Box>
-        <Box sx={{ width: '100%', px: '32px', mb: '32px' }}>
-          <Typography variant="h6" component="h6" sx={{ fontSize: '18px', fontWeight: 700 }}>
-            본문
-          </Typography>
-          <TextField label="본문의 내용을 적어주세요" multiline rows={3} fullWidth />
-          <Typography variant="h6" component="h6" sx={{ fontSize: '18px', fontWeight: 700, marginTop: '20px' }}>
-            카테고리
-          </Typography>
-          <RadioGroup row>
-            <FormControlLabel value="기상 미션" control={<Radio />} label="기상 미션" />
-            <FormControlLabel value="운동" control={<Radio />} label="운동" />
-            <FormControlLabel value="코딩 테스트" control={<Radio />} label="코딩 테스트" />
-          </RadioGroup>
-        </Box>
-      </Box>
-      <Button variant="contained">작성하기</Button>
+        <Button variant="contained" type="submit" sx={{ margin: 'auto', display: 'block' }}>
+          작성하기
+        </Button>
+      </form>
     </Dialog>
   );
 };

@@ -16,7 +16,7 @@ function App() {
         <NavigationBar>
           <Routes>
             <Route path="/" element={<MainPage />} />
-            <Route path="/user" element={<UserPage />} />
+            <Route path="/user/:id" element={<UserPage />} />
             <Route path="/campaign" element={<CampaignPage />} />
             <Route path="/oauth/kakao" element={<KakaoRedirectPage />} />
           </Routes>
