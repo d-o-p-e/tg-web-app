@@ -28,7 +28,7 @@ const UserProfile: FC<UserProfileProps> = ({ toggleDialog, feedData }) => {
       <Grid container justifyContent="center" sx={{ backgroundColor: blueGrey[50] }}>
         <Grid container justifyContent="center" sx={{ my: 2 }}>
           <Avatar alt="Remy Sharp" src={data?.data.profileImage} sx={{ width: 100, height: 100, fontSize: 60 }}>
-            {data?.data.nickname[0]}
+            {data?.data.nickname?.[0]}
           </Avatar>
         </Grid>
         <Grid container justifyContent="center">
