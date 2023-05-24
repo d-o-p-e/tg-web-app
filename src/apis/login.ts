@@ -11,5 +11,5 @@ export const postSignInWithKakao = () => {
 };
 
 export const getAccessTokenWIthKakao = (code: string | null) => {
-  return api.get(`/oauth/kakao?code=${code}`);
+  return api.get(`user/oauth/kakao?code=${code}`);
 };

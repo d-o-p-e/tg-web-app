@@ -8,12 +8,12 @@ const KakaoRedirectPage = () => {
   const [searchParams] = useSearchParams();
   const accessToken = searchParams.get('code');
   console.log(accessToken);
-    const { data, refetch } = useQuery(['kakao', 'code'], () => getAccessTokenWIthKakao(accessToken), {
-      onSuccess: (data) => {
-        console.log(data);
-        navigate('/');
-      },
-    });
+  const { data, refetch } = useQuery(['kakao', 'code'], () => getAccessTokenWIthKakao(accessToken), {
+    onSuccess: (data) => {
+      console.log(data);
+      navigate('/');
+    },
+  });
 
   return <div></div>;
 };
