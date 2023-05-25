@@ -20,6 +20,9 @@ import { FC, useState } from 'react';
 import CommentDialog from '../CommentDialog';
 import { Post } from '@/typings/post';
 import dayjs from 'dayjs';
+import { IMAGE_URL_PREFIX } from '@/constants/url';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { deleteFeed, deleteFeedLike, postFeedLike } from '@/apis/feed';
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -31,14 +34,31 @@ interface FeedProps {
 
 export default function Feed({ feed }: FeedProps) {
   const [open, setOpen] = useState(false);
+  const queryClient = useQueryClient();
   const toggleDialog = () => {
     setOpen((pre) => !pre);
   };
+  const { mutate: feedLikeMutate } = useMutation(postFeedLike, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['feeds']);
+    },
+  });
+  const { mutate: feedUnLikeMutate } = useMutation(deleteFeedLike, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['feeds']);
+    },
+  });
+  const { mutate: feedDeleteMutate } = useMutation(deleteFeed);
+
   return (
     <Card sx={{ display: 'flex', alignItems: 'center', padding: 0 }}>
       <Grid container sx={{ height: '100%', position: 'relative' }}>
         <Grid item xs={7}>
-          <img src={feed.imageUrl} alt="Paella dish" style={{ height: '100%', width: '100%', objectFit: 'cover' }} />
+          <img
+            src={IMAGE_URL_PREFIX + feed.imageUrl}
+            alt="Paella dish"
+            style={{ height: '100%', width: '100%', objectFit: 'cover' }}
+          />
         </Grid>
         <Grid item xs={5}>
           <CardHeader
@@ -55,13 +75,18 @@ export default function Feed({ feed }: FeedProps) {
               {feed.content}
             </Typography>
             <CardActions sx={{ bottom: 0, right: 0, position: 'absolute' }}>
-              <IconButton aria-label="add to favorites">
-                <FavoriteIcon />
+              <IconButton
+                aria-label="add to favorites"
+                onClick={() => {
+                  feed.isLiked ? feedUnLikeMutate(feed.postId) : feedLikeMutate(feed.postId);
+                }}
+              >
+                <FavoriteIcon color={feed.isLiked ? 'error' : 'inherit'} />
               </IconButton>
               <IconButton aria-label="share" onClick={toggleDialog}>
                 <CommentIcon />
               </IconButton>
-              <IconButton aria-label="settings">
+              <IconButton aria-label="settings" onClick={() => feedDeleteMutate(feed.postId)}>
                 <DeleteIcon />
               </IconButton>
             </CardActions>

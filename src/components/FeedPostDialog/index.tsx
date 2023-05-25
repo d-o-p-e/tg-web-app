@@ -20,10 +20,17 @@ interface FeedPostDialogProps {
 }
 
 const FeedPostDialog: FC<FeedPostDialogProps> = ({ toggleDialog, open }) => {
-  const [image, setImage] = useState<File>();
+  const [image, setImage] = useState<File | null>();
   const [category, setCategory] = useState<'EARLY_BIRD' | 'WORKOUT' | 'ALGORITHM'>('EARLY_BIRD');
   const [content, setContent] = useState('');
-  const { mutate } = useMutation(postFeed);
+  const { mutate } = useMutation(postFeed, {
+    onSuccess: () => {
+      setImage(null);
+      setCategory('EARLY_BIRD');
+      setContent('');
+      toggleDialog();
+    },
+  });
 
   const onChangeImage = (uploadedImage: File) => {
     setImage(uploadedImage);
