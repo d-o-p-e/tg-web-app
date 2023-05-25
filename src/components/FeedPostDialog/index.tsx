@@ -20,13 +20,13 @@ interface FeedPostDialogProps {
 }
 
 const FeedPostDialog: FC<FeedPostDialogProps> = ({ toggleDialog, open }) => {
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState<File>();
   const [category, setCategory] = useState<'EARLY_BIRD' | 'WORKOUT' | 'ALGORITHM'>('EARLY_BIRD');
   const [content, setContent] = useState('');
   const { mutate } = useMutation(postFeed);
 
   const onChangeImage = (uploadedImage: File) => {
-    setImage(URL.createObjectURL(uploadedImage));
+    setImage(uploadedImage);
   };
   const onDrop = (files: File[]) => {
     onChangeImage(files[0]);
@@ -65,7 +65,12 @@ const FeedPostDialog: FC<FeedPostDialogProps> = ({ toggleDialog, open }) => {
             }}
           >
             {image ? (
-              <img src={image} width={170} height={100} style={{ margin: 'auto', display: 'block' }} />
+              <img
+                src={URL.createObjectURL(image)}
+                width={170}
+                height={100}
+                style={{ margin: 'auto', display: 'block' }}
+              />
             ) : (
               <>
                 <input {...getInputProps()} />
