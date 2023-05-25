@@ -3,7 +3,7 @@ import { blueGrey } from '@mui/material/colors';
 import { ReactComponent as KakaoLoginIcon } from '@/assets/kakao_login.svg';
 import { Avatar, Button, CardHeader, FormGroupClassKey } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { postSignInWithKakao } from '@/apis/login';
 import CelebrationIcon from '@mui/icons-material/Celebration';
 
@@ -12,8 +12,8 @@ const kakao = (window as any).Kakao;
 const NavigationBar: FC<PropsWithChildren> = ({ children }) => {
   const navigate = useNavigate();
   const { data, refetch } = useQuery(['user'], postSignInWithKakao, { enabled: false });
-  console.log(data);
-
+  const queryClient = useQueryClient();
+  console.log(queryClient.getQueryData(['kakao', 'code']));
   return (
     <>
       <nav
@@ -33,15 +33,13 @@ const NavigationBar: FC<PropsWithChildren> = ({ children }) => {
         </Button>
         <Button
           sx={{ width: '200px', height: '70px' }}
-          onClick={
-            // () => refetch()
-            () =>
-              kakao.Auth.authorize({
-                redirectUri:
-                  import.meta.env.MODE === 'production'
-                    ? import.meta.env.VITE_KAKAO_REDIRECT_URI_PROD
-                    : import.meta.env.VITE_KAKAO_REDIRECT_URI_DEV,
-              })
+          onClick={() =>
+            kakao.Auth.authorize({
+              redirectUri:
+                import.meta.env.MODE === 'production'
+                  ? import.meta.env.VITE_KAKAO_REDIRECT_URI_PROD
+                  : import.meta.env.VITE_KAKAO_REDIRECT_URI_DEV,
+            })
           }
         >
           <KakaoLoginIcon />

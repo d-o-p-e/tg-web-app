@@ -8,7 +8,7 @@ interface Props {
 const Providers: FC<Props> = ({ children }) => {
   const queryClient = new QueryClient({
     defaultOptions: {
-      queries: { refetchOnWindowFocus: false },
+      queries: { refetchOnWindowFocus: false, retry: 0 },
     },
   });
   return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;

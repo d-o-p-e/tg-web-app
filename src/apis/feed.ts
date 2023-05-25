@@ -9,7 +9,7 @@ export const getAllFeeds = () => {
   return api.get<Post[]>(`community/feed?size=100`);
 };
 
-export const postFeed = (data: WritePost) => {
+export const postFeed = (data: FormData) => {
   return api.post(`community/`, data, { headers: { 'Content-Type': 'multipart/form-data' } });
 };
 

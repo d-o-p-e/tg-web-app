@@ -45,7 +45,11 @@ const FeedPostDialog: FC<FeedPostDialogProps> = ({ toggleDialog, open }) => {
   const onSubmit = (e: any) => {
     e.preventDefault();
     if (!image || !category || !content) return alert('모든 항목을 입력해주세요.');
-    mutate({ image, category, content });
+    const data = new FormData();
+    data.append('image', image);
+    data.append('category', category);
+    data.append('content', content);
+    mutate(data);
   };
   return (
     <Dialog onClose={toggleDialog} open={open}>
