@@ -46,7 +46,7 @@ const NavigationBar: FC<PropsWithChildren> = ({ children }) => {
                 }}
                 onClick={() => navigate(`/user/${userInfo?.userId}`)}
               >
-                <Avatar sx={{ backgroundColor: blueGrey[100] }}>R</Avatar>
+                <Avatar sx={{ backgroundColor: blueGrey[100] }}>{userInfo?.nickname[0]}</Avatar>
                 <h3 style={{ marginLeft: '20px' }}>{userInfo?.nickname}</h3>
               </Button>
             </div>

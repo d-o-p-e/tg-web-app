@@ -10,7 +10,7 @@ export const getAllFeeds = () => {
 };
 
 export const postFeed = (data: FormData) => {
-  return api.post(`/community`, data, { headers: { 'Content-Type': 'multipart/form-data' } });
+  return api.post(`/community/v2`, data, { headers: { 'Content-Type': 'multipart/form-data' } });
 };
 
 export const postFeedLike = (postId: number) => {

@@ -12,6 +12,6 @@ export const postSignInWithKakao = () => {
 
 export const getAccessTokenWIthKakao = (code: string | null) => {
   return import.meta.env.MODE === 'production'
-    ? api.get(`user/oauth/kakao?code=${code}`)
-    : api.get(`user/oauth/kakao/test?code=${code}`);
+    ? api.get(`/user/oauth/kakao?code=${code}`)
+    : api.get(`/user/oauth/kakao/test?code=${code}`);
 };
