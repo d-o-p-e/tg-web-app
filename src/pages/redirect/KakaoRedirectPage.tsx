@@ -11,7 +11,7 @@ const KakaoRedirectPage = () => {
   const queryClient = useQueryClient();
   const { data, refetch } = useQuery(['kakao', 'code'], () => getAccessTokenWIthKakao(accessToken), {
     onSuccess: (data) => {
-      queryClient.setQueryData(['user', 'me'], data);
+      queryClient.invalidateQueries(['user', 'me']);
       navigate('/');
     },
   });
