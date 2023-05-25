@@ -6,12 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { postSignInWithKakao } from '@/apis/login';
 import CelebrationIcon from '@mui/icons-material/Celebration';
+import { getUserById } from '@/apis/user';
 
 const kakao = (window as any).Kakao;
 
 const NavigationBar: FC<PropsWithChildren> = ({ children }) => {
   const navigate = useNavigate();
-  const { data, refetch } = useQuery(['user'], postSignInWithKakao, { enabled: false });
+  const { data } = useQuery(['user', 'me'], () => getUserById(0));
+  let userInfo = data?.data;
   const queryClient = useQueryClient();
   console.log(queryClient.getQueryData(['kakao', 'code']));
   return (
@@ -31,51 +33,56 @@ const NavigationBar: FC<PropsWithChildren> = ({ children }) => {
         <Button sx={{ color: 'white', '&:hover': { backgroundColor: blueGrey[400] } }} onClick={() => navigate('/')}>
           <h1>Commited</h1>
         </Button>
-        <Button
-          sx={{ width: '200px', height: '70px' }}
-          onClick={() =>
-            kakao.Auth.authorize({
-              redirectUri:
-                import.meta.env.MODE === 'production'
-                  ? import.meta.env.VITE_KAKAO_REDIRECT_URI_PROD
-                  : import.meta.env.VITE_KAKAO_REDIRECT_URI_DEV,
-            })
-          }
-        >
-          <KakaoLoginIcon />
-        </Button>
-        <div>
+        {userInfo ? (
+          <>
+            <div>
+              <Button
+                sx={{
+                  width: '200px',
+                  height: '70px',
+                  color: 'white',
+                  justifyContent: 'left',
+                  '&:hover': { backgroundColor: blueGrey[400] },
+                }}
+                onClick={() => navigate(`/user/${userInfo?.userId}`)}
+              >
+                <Avatar sx={{ backgroundColor: blueGrey[100] }}>R</Avatar>
+                <h3 style={{ marginLeft: '20px' }}>{userInfo?.nickname}</h3>
+              </Button>
+            </div>
+            <div>
+              <Button
+                sx={{
+                  width: '200px',
+                  height: '70px',
+                  color: 'white',
+                  justifyContent: 'left',
+                  '&:hover': { backgroundColor: blueGrey[400] },
+                }}
+                onClick={() => navigate('/campaign')}
+              >
+                <Avatar sx={{ backgroundColor: blueGrey[100] }}>
+                  <CelebrationIcon />
+                </Avatar>
+                <h3 style={{ marginLeft: '20px' }}>응모하기</h3>
+              </Button>
+            </div>
+          </>
+        ) : (
           <Button
-            sx={{
-              width: '200px',
-              height: '70px',
-              color: 'white',
-              justifyContent: 'left',
-              '&:hover': { backgroundColor: blueGrey[400] },
-            }}
-            onClick={() => navigate('/user/1')}
+            sx={{ width: '200px', height: '70px' }}
+            onClick={() =>
+              kakao.Auth.authorize({
+                redirectUri:
+                  import.meta.env.MODE === 'production'
+                    ? import.meta.env.VITE_KAKAO_REDIRECT_URI_PROD
+                    : import.meta.env.VITE_KAKAO_REDIRECT_URI_DEV,
+              })
+            }
           >
-            <Avatar sx={{ backgroundColor: blueGrey[100] }}>R</Avatar>
-            <h3 style={{ marginLeft: '20px' }}>테스트</h3>
+            <KakaoLoginIcon />
           </Button>
-        </div>
-        <div>
-          <Button
-            sx={{
-              width: '200px',
-              height: '70px',
-              color: 'white',
-              justifyContent: 'left',
-              '&:hover': { backgroundColor: blueGrey[400] },
-            }}
-            onClick={() => navigate('/campaign')}
-          >
-            <Avatar sx={{ backgroundColor: blueGrey[100] }}>
-              <CelebrationIcon />
-            </Avatar>
-            <h3 style={{ marginLeft: '20px' }}>응모하기</h3>
-          </Button>
-        </div>
+        )}
       </nav>
       <main style={{ width: '80%', height: '100%', marginLeft: '20%', backgroundColor: blueGrey[50] }}>{children}</main>
     </>

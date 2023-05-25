@@ -48,7 +48,11 @@ export default function Feed({ feed }: FeedProps) {
       queryClient.invalidateQueries(['feeds']);
     },
   });
-  const { mutate: feedDeleteMutate } = useMutation(deleteFeed);
+  const { mutate: feedDeleteMutate } = useMutation(deleteFeed, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['feeds']);
+    },
+  });
 
   return (
     <Card sx={{ display: 'flex', alignItems: 'center', padding: 0 }}>
