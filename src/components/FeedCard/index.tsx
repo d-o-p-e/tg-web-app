@@ -72,6 +72,7 @@ export default function Feed({ feed }: FeedProps) {
             title={feed.userNickname}
             subheader={dayjs(feed.createdAt).format('YYYY-MM-DD')}
             onClick={() => navigate(`/user/${feed.userId}`)}
+            sx={{ cursor: 'pointer' }}
           />
           <CardContent>
             <Typography variant="body2" color="text.secondary">

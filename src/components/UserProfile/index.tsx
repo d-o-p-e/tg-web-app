@@ -60,7 +60,7 @@ const UserProfile: FC<UserProfileProps> = ({ toggleDialog, feedData }) => {
               <img
                 src={IMAGE_URL_PREFIX + feed.imageUrl}
                 alt="feed image"
-                style={{ height: '100%', width: '100%', objectFit: 'cover' }}
+                style={{ height: '100%', width: '100%', objectFit: 'cover', aspectRatio: 1 / 1 }}
               />
             </motion.div>
           </Grid>

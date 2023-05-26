@@ -34,6 +34,7 @@ const Comment: FC<CommentProps> = ({ comment, feedId }) => {
             <DeleteIcon />
           </IconButton>
         }
+        sx={{ cursor: 'pointer' }}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
