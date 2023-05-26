@@ -12,14 +12,16 @@ import { useNavigate } from 'react-router-dom';
 interface CommentProps {
   comment: CommentType;
   feedId: number;
+  toggleSnackBar: () => void;
 }
 
-const Comment: FC<CommentProps> = ({ comment, feedId }) => {
+const Comment: FC<CommentProps> = ({ comment, feedId, toggleSnackBar }) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { mutate } = useMutation(deleteComment, {
     onSuccess: () => {
       queryClient.invalidateQueries(['feed', feedId, 'comments']);
+      toggleSnackBar();
     },
   });
   return (

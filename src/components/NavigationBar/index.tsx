@@ -12,7 +12,8 @@ const kakao = (window as any).Kakao;
 
 const NavigationBar: FC<PropsWithChildren> = ({ children }) => {
   const navigate = useNavigate();
-  const { data } = useQuery(['user', 'me'], () => getUserById(0));
+  const { data, isLoading } = useQuery(['user', 'me'], () => getUserById(0));
+  if (isLoading) return <></>;
   let userInfo = data?.data;
   const queryClient = useQueryClient();
   console.log(queryClient.getQueryData(['kakao', 'code']));

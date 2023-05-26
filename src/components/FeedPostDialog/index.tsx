@@ -76,9 +76,9 @@ const FeedPostDialog: FC<FeedPostDialogProps> = ({ toggleDialog, open }) => {
             {image ? (
               <img
                 src={URL.createObjectURL(image)}
-                width={170}
-                height={100}
-                style={{ margin: 'auto', display: 'block' }}
+                width="100%"
+                height="100%"
+                style={{ margin: 'auto', display: 'block', aspectRatio: 1 / 1 }}
               />
             ) : (
               <>

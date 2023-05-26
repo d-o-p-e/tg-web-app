@@ -9,11 +9,16 @@ import { motion } from 'framer-motion';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { AxiosResponse } from 'axios';
 import { Post } from '@/typings/post';
+import { Alert, Snackbar } from '@mui/material';
 
 interface FeedVerticalSliderProps {
   feedData: Post[] | undefined;
 }
 const FeedVerticalSlider: FC<FeedVerticalSliderProps> = ({ feedData }) => {
+  const [snackBarOpen, setSnackBarOpen] = useState(false);
+  const toggleSnackBar = () => {
+    setSnackBarOpen((pre) => !pre);
+  };
   if (feedData === undefined) return <></>;
   return (
     <>
@@ -30,11 +35,16 @@ const FeedVerticalSlider: FC<FeedVerticalSliderProps> = ({ feedData }) => {
         {feedData.map((feed) => {
           return (
             <SwiperSlide style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <Feed feed={feed} />
+              <Feed feed={feed} toggleSnackBar={toggleSnackBar} />
             </SwiperSlide>
           );
         })}
       </Swiper>
+      <Snackbar open={snackBarOpen} autoHideDuration={6000} onClose={toggleSnackBar}>
+        <Alert onClose={toggleSnackBar} sx={{ width: '100%' }}>
+          삭제되었습니다.
+        </Alert>
+      </Snackbar>
     </>
   );
 };

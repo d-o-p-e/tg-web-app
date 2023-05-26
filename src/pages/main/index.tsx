@@ -1,5 +1,5 @@
 import FeedVerticalSlider from '@/components/FeedVerticalSlider';
-import { Fab, Grid } from '@mui/material';
+import { Alert, Fab, Grid, Snackbar } from '@mui/material';
 import React, { useState } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import FeedPostDialog from '@/components/FeedPostDialog';
@@ -8,6 +8,7 @@ import { getAllFeeds } from '@/apis/feed';
 
 const MainPage = () => {
   const [open, setOpen] = useState(false);
+
   const toggleDialog = () => {
     setOpen((pre) => !pre);
   };
