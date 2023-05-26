@@ -5,12 +5,16 @@ import red from '@mui/material/colors/red';
 import { Comment as CommentType } from '@/typings/comment';
 import dayjs from 'dayjs';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { deleteComment } from '@/apis/comment';
+import { useMutation } from '@tanstack/react-query';
 
 interface CommentProps {
   comment: CommentType;
+  feedId: number;
 }
 
-const Comment: FC<CommentProps> = ({ comment }) => {
+const Comment: FC<CommentProps> = ({ comment, feedId }) => {
+  const { mutate } = useMutation(deleteComment);
   return (
     <section style={{ marginTop: '20px' }}>
       <CardHeader
@@ -18,7 +22,7 @@ const Comment: FC<CommentProps> = ({ comment }) => {
         title={comment.nickName}
         subheader={dayjs(comment.createdAt).format('YYYY-MM-DD')}
         action={
-          <IconButton aria-label="settings">
+          <IconButton aria-label="settings" onClick={() => mutate({ commentId: comment.commentId, postId: feedId })}>
             <DeleteIcon />
           </IconButton>
         }

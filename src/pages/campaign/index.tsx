@@ -1,59 +1,47 @@
 import { Button, Card, CardContent, CardMedia, Divider, Grid, Typography } from '@mui/material';
 import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, EffectCube, Pagination } from 'swiper';
-
 import 'swiper/css';
 import 'swiper/css/pagination';
-import GiveAwayItem from '@/components/GiveAwayItem';
 import { useMutation } from '@tanstack/react-query';
 import { postCampaign } from '@/apis/campaign';
+import { ReactComponent as GiftIcon } from '@/assets/gift.svg';
+import { motion } from 'framer-motion';
 
 const CampaignPage = () => {
   const { mutate } = useMutation(postCampaign);
   return (
     <>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%' }}>
-        <Typography variant="h5" component="h5" sx={{ display: 'block', margin: 'auto' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          height: '100%',
+          justifyContent: 'center',
+        }}
+      >
+        <Typography
+          variant="h5"
+          component="h5"
+          sx={{ display: 'block', marginX: 'auto', marginBottom: '30px', fontWeight: 700 }}
+        >
           두근 두근 무엇이 나올까요?
         </Typography>
-        <Button variant="contained" size="large" sx={{ display: 'block', margin: 'auto' }} onClick={() => mutate(1)}>
+        <motion.div
+          animate={{ rotate: [0, 5, 0, -5, 0], scale: 1 }}
+          transition={{
+            times: [0, 0.25, 0.5, 0.75, 1],
+            repeatDelay: 1.8,
+            repeat: Infinity,
+          }}
+        >
+          <GiftIcon width={400} height={400} />
+        </motion.div>
+        <Button variant="contained" size="large" onClick={() => mutate(1)}>
           경품 추첨하기
         </Button>
+        <span style={{ fontSize: '12px' }}>남은 마일리지: 1000</span>
       </div>
-      {/* <Swiper
-        slidesPerView={3}
-        spaceBetween={30}
-        centeredSlides={true}
-        pagination={{
-          clickable: true,
-        }}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
-        initialSlide={2}
-        modules={[Autoplay, Pagination]}
-      >
-        <SwiperSlide>
-          <GiveAwayItem />
-        </SwiperSlide>
-        <SwiperSlide>
-          <GiveAwayItem />
-        </SwiperSlide>
-        <SwiperSlide>
-          <GiveAwayItem />
-        </SwiperSlide>
-        <SwiperSlide>
-          <GiveAwayItem />
-        </SwiperSlide>
-        <SwiperSlide>
-          <GiveAwayItem />
-        </SwiperSlide>
-        <SwiperSlide>
-          <GiveAwayItem />
-        </SwiperSlide>
-      </Swiper>*/}
     </>
   );
 };

@@ -36,12 +36,12 @@ const CommentDialog: FC<CommentDialogProps> = ({ toggleDialog, open, feedId }) =
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />
-          <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+          <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
             <SendIcon />
           </IconButton>
         </form>
         {comments?.map((comment) => (
-          <Comment comment={comment} />
+          <Comment comment={comment} feedId={feedId} />
         ))}
       </Box>
     </Dialog>
