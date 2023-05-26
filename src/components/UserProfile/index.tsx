@@ -28,7 +28,11 @@ const UserProfile: FC<UserProfileProps> = ({ toggleDialog, feedData }) => {
     <>
       <Grid container justifyContent="center" sx={{ backgroundColor: blueGrey[50] }}>
         <Grid container justifyContent="center" sx={{ my: 2 }}>
-          <Avatar alt="Remy Sharp" src={data?.data.profileImage} sx={{ width: 100, height: 100, fontSize: 60 }}>
+          <Avatar
+            alt={data?.data.nickname?.[0]}
+            src={data?.data.profileImage}
+            sx={{ width: 100, height: 100, fontSize: 60 }}
+          >
             {data?.data.nickname?.[0]}
           </Avatar>
         </Grid>
@@ -55,7 +59,7 @@ const UserProfile: FC<UserProfileProps> = ({ toggleDialog, feedData }) => {
             <motion.div whileHover={{ scale: 1.2 }} onHoverStart={(e) => {}} onHoverEnd={(e) => {}}>
               <img
                 src={IMAGE_URL_PREFIX + feed.imageUrl}
-                alt="Paella dish"
+                alt="feed image"
                 style={{ height: '100%', width: '100%', objectFit: 'cover' }}
               />
             </motion.div>

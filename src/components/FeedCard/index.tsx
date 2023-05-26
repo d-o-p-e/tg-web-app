@@ -95,7 +95,7 @@ export default function Feed({ feed }: FeedProps) {
               </IconButton>
             </CardActions>
           </CardContent>
-          <CommentDialog open={open} toggleDialog={toggleDialog} />
+          <CommentDialog open={open} toggleDialog={toggleDialog} feedId={feed.postId} />
         </Grid>
       </Grid>
     </Card>
