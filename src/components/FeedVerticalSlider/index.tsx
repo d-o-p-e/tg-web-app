@@ -13,7 +13,7 @@ import { Post } from '@/typings/post';
 interface FeedVerticalSliderProps {
   feedData: Post[] | undefined;
 }
-const FeedVerticalSlider: FC<FeedVerticalSliderProps> = ({ feedData = dummyData }) => {
+const FeedVerticalSlider: FC<FeedVerticalSliderProps> = ({ feedData }) => {
   return (
     <>
       <Swiper

@@ -4,6 +4,7 @@ import React, { FC, useRef } from 'react';
 import red from '@mui/material/colors/red';
 import { Comment as CommentType } from '@/typings/comment';
 import dayjs from 'dayjs';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 interface CommentProps {
   comment: CommentType;
@@ -16,6 +17,11 @@ const Comment: FC<CommentProps> = ({ comment }) => {
         avatar={<Avatar sx={{ bgcolor: red[500] }}>{comment.nickName[0]}</Avatar>}
         title={comment.nickName}
         subheader={dayjs(comment.createdAt).format('YYYY-MM-DD')}
+        action={
+          <IconButton aria-label="settings">
+            <DeleteIcon />
+          </IconButton>
+        }
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
