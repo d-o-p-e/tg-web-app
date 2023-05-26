@@ -44,16 +44,19 @@ export default function Feed({ feed, toggleSnackBar }: FeedProps) {
   const { mutate: feedLikeMutate } = useMutation(postFeedLike, {
     onSuccess: () => {
       queryClient.invalidateQueries(['feeds']);
+      queryClient.invalidateQueries(['user', 'feeds']);
     },
   });
   const { mutate: feedUnLikeMutate } = useMutation(deleteFeedLike, {
     onSuccess: () => {
       queryClient.invalidateQueries(['feeds']);
+      queryClient.invalidateQueries(['user', 'feeds']);
     },
   });
   const { mutate: feedDeleteMutate } = useMutation(deleteFeed, {
     onSuccess: () => {
       queryClient.invalidateQueries(['feeds']);
+      queryClient.invalidateQueries(['user', 'feeds']);
       toggleSnackBar();
     },
   });

@@ -9,15 +9,16 @@ import { useParams } from 'react-router-dom';
 const UserPage = () => {
   const params = useParams();
   const [open, setOpen] = useState(false);
+  const [clickIndex, setClickIndex] = useState(0);
   const toggleDialog = () => {
     setOpen((pre) => !pre);
   };
   const { data: feedData } = useQuery(['user', 'feeds', Number(params.id)], () => getFeedsByUserId(Number(params.id)));
   return (
     <>
-      <UserProfile toggleDialog={toggleDialog} feedData={feedData} />
+      <UserProfile toggleDialog={toggleDialog} feedData={feedData} setClickIndex={setClickIndex} />
       <Backdrop sx={{ color: '#fff', zIndex: 100 }} open={open} onClick={toggleDialog}>
-        <FeedVerticalSlider feedData={feedData?.data} />
+        <FeedVerticalSlider feedData={feedData?.data} clickIndex={clickIndex} />
       </Backdrop>
     </>
   );

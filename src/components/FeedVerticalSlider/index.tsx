@@ -13,8 +13,9 @@ import { Alert, Snackbar } from '@mui/material';
 
 interface FeedVerticalSliderProps {
   feedData: Post[] | undefined;
+  clickIndex: number;
 }
-const FeedVerticalSlider: FC<FeedVerticalSliderProps> = ({ feedData }) => {
+const FeedVerticalSlider: FC<FeedVerticalSliderProps> = ({ feedData, clickIndex }) => {
   const [snackBarOpen, setSnackBarOpen] = useState(false);
   const toggleSnackBar = () => {
     setSnackBarOpen((pre) => !pre);
@@ -31,6 +32,7 @@ const FeedVerticalSlider: FC<FeedVerticalSliderProps> = ({ feedData }) => {
         }}
         modules={[Mousewheel, Pagination]}
         style={{ width: '80%', height: '100%' }}
+        initialSlide={clickIndex}
       >
         {feedData.map((feed) => {
           return (

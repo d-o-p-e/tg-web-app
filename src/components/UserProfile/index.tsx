@@ -18,9 +18,10 @@ import { IMAGE_URL_PREFIX } from '@/constants/url';
 interface UserProfileProps {
   toggleDialog: () => void;
   feedData: AxiosResponse<Post[], any> | undefined;
+  setClickIndex: (index: number) => void;
 }
 
-const UserProfile: FC<UserProfileProps> = ({ toggleDialog, feedData }) => {
+const UserProfile: FC<UserProfileProps> = ({ toggleDialog, feedData, setClickIndex }) => {
   const params = useParams();
   const { data } = useQuery(['user', Number(params.id)], () => getUserById(Number(params.id)));
 
@@ -54,8 +55,16 @@ const UserProfile: FC<UserProfileProps> = ({ toggleDialog, feedData }) => {
         </Grid>
       </Grid>
       <Grid container spacing={2} sx={{ padding: '50px', backgroundColor: lightBlue[50] }}>
-        {feedData?.data.map((feed) => (
-          <Grid item md={3} sx={{ cursor: 'pointer', aspectRatio: 1 / 1 }} onClick={toggleDialog}>
+        {feedData?.data.map((feed, index) => (
+          <Grid
+            item
+            md={3}
+            sx={{ cursor: 'pointer', aspectRatio: 1 / 1 }}
+            onClick={() => {
+              setClickIndex(index);
+              toggleDialog();
+            }}
+          >
             <motion.div whileHover={{ scale: 1.2 }} onHoverStart={(e) => {}} onHoverEnd={(e) => {}}>
               <img
                 src={IMAGE_URL_PREFIX + feed.imageUrl}
