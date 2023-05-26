@@ -7,6 +7,7 @@ import dayjs from 'dayjs';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { deleteComment } from '@/apis/comment';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 
 interface CommentProps {
   comment: CommentType;
@@ -14,16 +15,23 @@ interface CommentProps {
 }
 
 const Comment: FC<CommentProps> = ({ comment, feedId }) => {
-  const quetyClient = useQueryClient();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { mutate } = useMutation(deleteComment, {
     onSuccess: () => {
-      quetyClient.invalidateQueries(['feed', feedId, 'comments']);
+      queryClient.invalidateQueries(['feed', feedId, 'comments']);
     },
   });
   return (
     <section style={{ marginTop: '20px' }}>
       <CardHeader
-        avatar={<Avatar sx={{ bgcolor: red[500] }} src={comment.profileImageUrl}></Avatar>}
+        avatar={
+          <Avatar
+            sx={{ bgcolor: red[500] }}
+            src={comment.profileImageUrl}
+            onClick={() => navigate(`/user/${comment.userId}`)}
+          ></Avatar>
+        }
         title={comment.nickName}
         subheader={dayjs(comment.createdAt).format('YYYY-MM-DD')}
         action={

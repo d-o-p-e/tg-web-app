@@ -14,15 +14,17 @@ const CommentDialog: FC<CommentDialogProps> = ({ toggleDialog, open, feedId }) =
   const queryClient = useQueryClient();
   const [content, setContent] = useState('');
   const { data } = useQuery(['feed', feedId, 'comments'], () => getComments(feedId));
-  const { mutate } = useMutation(postComment);
+  const { mutate } = useMutation(postComment, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['feed', feedId, 'comments']);
+    },
+  });
   const comments = data?.data;
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     mutate({ postId: feedId, content });
     setContent('');
-    toggleDialog();
-    queryClient.invalidateQueries(['feed', feedId, 'comments']);
   };
 
   return (

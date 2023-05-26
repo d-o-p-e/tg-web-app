@@ -23,6 +23,7 @@ import dayjs from 'dayjs';
 import { IMAGE_URL_PREFIX } from '@/constants/url';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteFeed, deleteFeedLike, postFeedLike } from '@/apis/feed';
+import { useNavigate } from 'react-router-dom';
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -33,6 +34,7 @@ interface FeedProps {
 }
 
 export default function Feed({ feed }: FeedProps) {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const queryClient = useQueryClient();
   const toggleDialog = () => {
@@ -61,12 +63,19 @@ export default function Feed({ feed }: FeedProps) {
           <img
             src={IMAGE_URL_PREFIX + feed.imageUrl}
             alt="Paella dish"
-            style={{ height: '100%', width: '100%', objectFit: 'cover' }}
+            style={{ height: '100%', width: '100%', objectFit: 'cover', aspectRatio: 1 / 1 }}
           />
         </Grid>
         <Grid item xs={5}>
           <CardHeader
-            avatar={<Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" src={feed.userProfileImageUrl}></Avatar>}
+            avatar={
+              <Avatar
+                sx={{ bgcolor: red[500] }}
+                aria-label="recipe"
+                src={feed.userProfileImageUrl}
+                onClick={() => navigate(`/user/${feed.userId}`)}
+              ></Avatar>
+            }
             title={feed.userNickname}
             subheader={dayjs(feed.createdAt).format('YYYY-MM-DD')}
           />
