@@ -40,9 +40,7 @@ const FeedVerticalSlider: FC<FeedVerticalSliderProps> = ({ feedData, clickIndex 
           dynamicBullets: true,
         }}
         modules={[Mousewheel, Pagination]}
-        navigation={true}
         style={{ width: '80%', height: '100%' }}
-        initialSlide={clickIndex}
         virtual
       >
         {feedData.map((feed, index) => {
