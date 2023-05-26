@@ -2,7 +2,7 @@ import { Box, Dialog, TextField, Button, Divider, Paper, InputBase, IconButton }
 import React, { FC, useState } from 'react';
 import Comment from './Comment';
 import SendIcon from '@mui/icons-material/Send';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getComments, postComment } from '@/apis/comment';
 interface CommentDialogProps {
   toggleDialog: () => void;
@@ -11,6 +11,7 @@ interface CommentDialogProps {
 }
 
 const CommentDialog: FC<CommentDialogProps> = ({ toggleDialog, open, feedId }) => {
+  const queryClient = useQueryClient();
   const [content, setContent] = useState('');
   const { data } = useQuery(['feed', feedId, 'comments'], () => getComments(feedId));
   const { mutate } = useMutation(postComment);
@@ -21,6 +22,7 @@ const CommentDialog: FC<CommentDialogProps> = ({ toggleDialog, open, feedId }) =
     mutate({ postId: feedId, content });
     setContent('');
     toggleDialog();
+    queryClient.invalidateQueries(['feed', feedId, 'comments']);
   };
 
   return (

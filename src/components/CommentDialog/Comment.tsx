@@ -6,7 +6,7 @@ import { Comment as CommentType } from '@/typings/comment';
 import dayjs from 'dayjs';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { deleteComment } from '@/apis/comment';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 interface CommentProps {
   comment: CommentType;
@@ -14,11 +14,16 @@ interface CommentProps {
 }
 
 const Comment: FC<CommentProps> = ({ comment, feedId }) => {
-  const { mutate } = useMutation(deleteComment);
+  const quetyClient = useQueryClient();
+  const { mutate } = useMutation(deleteComment, {
+    onSuccess: () => {
+      quetyClient.invalidateQueries(['feed', feedId, 'comments']);
+    },
+  });
   return (
     <section style={{ marginTop: '20px' }}>
       <CardHeader
-        avatar={<Avatar sx={{ bgcolor: red[500] }}>{comment.nickName[0]}</Avatar>}
+        avatar={<Avatar sx={{ bgcolor: red[500] }} src={comment.profileImageUrl}></Avatar>}
         title={comment.nickName}
         subheader={dayjs(comment.createdAt).format('YYYY-MM-DD')}
         action={
