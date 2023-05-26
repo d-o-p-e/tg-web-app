@@ -55,7 +55,7 @@ const UserProfile: FC<UserProfileProps> = ({ toggleDialog, feedData }) => {
       </Grid>
       <Grid container spacing={2} sx={{ padding: '50px', backgroundColor: lightBlue[50] }}>
         {feedData?.data.map((feed) => (
-          <Grid item md={3} sx={{ cursor: 'pointer' }} onClick={toggleDialog}>
+          <Grid item md={3} sx={{ cursor: 'pointer', aspectRatio: 1 / 1 }} onClick={toggleDialog}>
             <motion.div whileHover={{ scale: 1.2 }} onHoverStart={(e) => {}} onHoverEnd={(e) => {}}>
               <img
                 src={IMAGE_URL_PREFIX + feed.imageUrl}

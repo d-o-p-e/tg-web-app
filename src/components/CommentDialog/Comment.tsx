@@ -25,15 +25,10 @@ const Comment: FC<CommentProps> = ({ comment, feedId }) => {
   return (
     <section style={{ marginTop: '20px' }}>
       <CardHeader
-        avatar={
-          <Avatar
-            sx={{ bgcolor: red[500] }}
-            src={comment.profileImageUrl}
-            onClick={() => navigate(`/user/${comment.userId}`)}
-          ></Avatar>
-        }
+        avatar={<Avatar sx={{ bgcolor: red[500] }} src={comment.profileImageUrl}></Avatar>}
         title={comment.nickName}
         subheader={dayjs(comment.createdAt).format('YYYY-MM-DD')}
+        onClick={() => navigate(`/user/${comment.userId}`)}
         action={
           <IconButton aria-label="settings" onClick={() => mutate({ commentId: comment.commentId, postId: feedId })}>
             <DeleteIcon />

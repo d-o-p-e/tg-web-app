@@ -68,16 +68,10 @@ export default function Feed({ feed }: FeedProps) {
         </Grid>
         <Grid item xs={5}>
           <CardHeader
-            avatar={
-              <Avatar
-                sx={{ bgcolor: red[500] }}
-                aria-label="recipe"
-                src={feed.userProfileImageUrl}
-                onClick={() => navigate(`/user/${feed.userId}`)}
-              ></Avatar>
-            }
+            avatar={<Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" src={feed.userProfileImageUrl}></Avatar>}
             title={feed.userNickname}
             subheader={dayjs(feed.createdAt).format('YYYY-MM-DD')}
+            onClick={() => navigate(`/user/${feed.userId}`)}
           />
           <CardContent>
             <Typography variant="body2" color="text.secondary">
