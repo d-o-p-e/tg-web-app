@@ -14,6 +14,7 @@ interface FeedVerticalSliderProps {
   feedData: Post[] | undefined;
 }
 const FeedVerticalSlider: FC<FeedVerticalSliderProps> = ({ feedData }) => {
+  if (feedData === undefined) return <></>;
   return (
     <>
       <Swiper
@@ -26,7 +27,7 @@ const FeedVerticalSlider: FC<FeedVerticalSliderProps> = ({ feedData }) => {
         modules={[Mousewheel, Pagination]}
         style={{ width: '80%', height: '100%' }}
       >
-        {feedData?.map((feed) => {
+        {feedData.map((feed) => {
           return (
             <SwiperSlide style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <Feed feed={feed} />
