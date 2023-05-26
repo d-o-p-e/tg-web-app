@@ -28,6 +28,7 @@ const NavigationBar: FC<PropsWithChildren> = ({ children }) => {
           height: '100%',
           color: 'white',
           width: '20%',
+          minWidth: '220px',
         }}
       >
         <Button sx={{ color: 'white', '&:hover': { backgroundColor: blueGrey[400] } }} onClick={() => navigate('/')}>
@@ -84,7 +85,7 @@ const NavigationBar: FC<PropsWithChildren> = ({ children }) => {
           </Button>
         )}
       </nav>
-      <main style={{ width: '80%', height: '100%', marginLeft: '20%', backgroundColor: blueGrey[50] }}>{children}</main>
+      <main style={{ width: '80%', height: '100%', marginLeft: '20%' }}>{children}</main>
     </>
   );
 };

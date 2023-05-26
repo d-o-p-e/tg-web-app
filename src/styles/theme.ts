@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material';
+import blueGrey from '@mui/material/colors/blueGrey';
 
 export const theme = createTheme({
   components: {
@@ -11,9 +12,11 @@ export const theme = createTheme({
         body: {
           position: 'relative',
           height: '100%',
+          backgroundColor: blueGrey[50],
         },
         '#root': {
           height: '100%',
+          minWidth: '1095px',
         },
       },
     },
