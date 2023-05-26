@@ -60,7 +60,7 @@ export default function Feed({ feed, toggleSnackBar }: FeedProps) {
 
   return (
     <>
-      <Card sx={{ display: 'flex', alignItems: 'center', padding: 0 }}>
+      <Card sx={{ display: 'flex', alignItems: 'center', padding: 0 }} onClick={(e) => e.stopPropagation()}>
         <Grid container sx={{ height: '100%', position: 'relative' }}>
           <Grid item xs={7}>
             <img
