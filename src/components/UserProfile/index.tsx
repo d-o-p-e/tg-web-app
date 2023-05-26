@@ -13,6 +13,7 @@ import { useParams } from 'react-router-dom';
 import { getFeedsByUserId } from '@/apis/feed';
 import { Post } from '@/typings/post';
 import { AxiosResponse } from 'axios';
+import { IMAGE_URL_PREFIX } from '@/constants/url';
 
 interface UserProfileProps {
   toggleDialog: () => void;
@@ -41,9 +42,6 @@ const UserProfile: FC<UserProfileProps> = ({ toggleDialog, feedData }) => {
             <ProfileBadge name="기상미션" count={data?.data.earlyBirdCount} />
           </Grid>
           <Grid item md={1}>
-            <ProfileBadge name="알고리즘 미션" count={data?.data.algorithmCount} />
-          </Grid>
-          <Grid item md={1}>
             <ProfileBadge name="운동미션" count={data?.data.workoutCount} />
           </Grid>
           <Grid item xs={12}>
@@ -56,7 +54,7 @@ const UserProfile: FC<UserProfileProps> = ({ toggleDialog, feedData }) => {
           <Grid item md={3} sx={{ cursor: 'pointer' }} onClick={toggleDialog}>
             <motion.div whileHover={{ scale: 1.2 }} onHoverStart={(e) => {}} onHoverEnd={(e) => {}}>
               <img
-                src={feed.imageUrl}
+                src={IMAGE_URL_PREFIX + feed.imageUrl}
                 alt="Paella dish"
                 style={{ height: '100%', width: '100%', objectFit: 'cover' }}
               />
