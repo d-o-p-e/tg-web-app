@@ -2,7 +2,7 @@ export interface Post {
   postId: number;
   content: string;
   imageUrl: string;
-  category: 'EARLY_BIRD' | 'WORKOUT' | 'ALGORITHM';
+  category: 'EARLY_BIRD' | 'WORKOUT';
   createdAt: string;
   updatedAt: string;
   userId: number;
@@ -16,6 +16,6 @@ export interface Post {
 
 export interface WritePost {
   content: string;
-  category: 'EARLY_BIRD' | 'WORKOUT' | 'ALGORITHM';
+  category: 'EARLY_BIRD' | 'WORKOUT';
   image: any;
 }

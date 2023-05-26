@@ -10,7 +10,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React, { FC, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 
@@ -20,8 +20,9 @@ interface FeedPostDialogProps {
 }
 
 const FeedPostDialog: FC<FeedPostDialogProps> = ({ toggleDialog, open }) => {
+  const queryClient = useQueryClient();
   const [image, setImage] = useState<File | null>();
-  const [category, setCategory] = useState<'EARLY_BIRD' | 'WORKOUT' | 'ALGORITHM'>('EARLY_BIRD');
+  const [category, setCategory] = useState<'EARLY_BIRD' | 'WORKOUT'>('EARLY_BIRD');
   const [content, setContent] = useState('');
   const { mutate } = useMutation(postFeed, {
     onSuccess: () => {
@@ -29,6 +30,7 @@ const FeedPostDialog: FC<FeedPostDialogProps> = ({ toggleDialog, open }) => {
       setCategory('EARLY_BIRD');
       setContent('');
       toggleDialog();
+      queryClient.invalidateQueries(['feeds']);
     },
   });
 
@@ -44,7 +46,7 @@ const FeedPostDialog: FC<FeedPostDialogProps> = ({ toggleDialog, open }) => {
     setContent(e.target.value);
   };
   const onChangeCategory = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value === 'EARLY_BIRD' || e.target.value === 'WORKOUT' || e.target.value === 'ALGORITHM') {
+    if (e.target.value === 'EARLY_BIRD' || e.target.value === 'WORKOUT') {
       setCategory(e.target.value);
     }
   };
@@ -116,7 +118,6 @@ const FeedPostDialog: FC<FeedPostDialogProps> = ({ toggleDialog, open }) => {
             <RadioGroup row onChange={onChangeCategory}>
               <FormControlLabel value="EARLY_BIRD" control={<Radio />} label="기상 미션" />
               <FormControlLabel value="WORKOUT" control={<Radio />} label="운동" />
-              <FormControlLabel value="ALGORITHM" control={<Radio />} label="코딩 테스트" />
             </RadioGroup>
           </Box>
         </Box>
