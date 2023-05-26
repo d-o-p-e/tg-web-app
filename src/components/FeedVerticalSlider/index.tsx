@@ -25,10 +25,10 @@ const FeedVerticalSlider: FC<FeedVerticalSliderProps> = ({ feedData, clickIndex 
   const toggleSnackBar = () => {
     setSnackBarOpen((pre) => !pre);
   };
-  if (feedData === undefined) return <></>;
   useEffect(() => {
     slideTo(clickIndex);
   }, [clickIndex]);
+  if (feedData === undefined) return <></>;
   return (
     <>
       <Swiper
