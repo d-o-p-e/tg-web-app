@@ -1,5 +1,5 @@
-import React, { FC, useRef, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import React, { FC, useEffect, useRef, useState } from 'react';
+import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
@@ -10,6 +10,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { AxiosResponse } from 'axios';
 import { Post } from '@/typings/post';
 import { Alert, Snackbar } from '@mui/material';
+import { Swiper as SwiperClass } from 'swiper/types';
 
 interface FeedVerticalSliderProps {
   feedData: Post[] | undefined;
@@ -17,13 +18,21 @@ interface FeedVerticalSliderProps {
 }
 const FeedVerticalSlider: FC<FeedVerticalSliderProps> = ({ feedData, clickIndex }) => {
   const [snackBarOpen, setSnackBarOpen] = useState(false);
+  const [swiperRef, setSwiperRef] = useState<SwiperClass | undefined>(undefined);
+  const slideTo = (index: number) => {
+    swiperRef?.slideTo(index - 1, 0);
+  };
   const toggleSnackBar = () => {
     setSnackBarOpen((pre) => !pre);
   };
   if (feedData === undefined) return <></>;
+  useEffect(() => {
+    slideTo(clickIndex);
+  }, [clickIndex]);
   return (
     <>
       <Swiper
+        onSwiper={(ref) => setSwiperRef(ref)}
         direction={'vertical'}
         slidesPerView={1}
         mousewheel={true}
@@ -31,12 +40,17 @@ const FeedVerticalSlider: FC<FeedVerticalSliderProps> = ({ feedData, clickIndex 
           dynamicBullets: true,
         }}
         modules={[Mousewheel, Pagination]}
+        navigation={true}
         style={{ width: '80%', height: '100%' }}
         initialSlide={clickIndex}
+        virtual
       >
-        {feedData.map((feed) => {
+        {feedData.map((feed, index) => {
           return (
-            <SwiperSlide style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <SwiperSlide
+              style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+              virtualIndex={index}
+            >
               <Feed feed={feed} toggleSnackBar={toggleSnackBar} />
             </SwiperSlide>
           );
