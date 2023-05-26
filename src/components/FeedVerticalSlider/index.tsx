@@ -32,7 +32,7 @@ const FeedVerticalSlider: FC<FeedVerticalSliderProps> = ({ feedData, clickIndex 
   return (
     <>
       <Swiper
-        onSwiper={(ref) => setSwiperRef(ref)}
+        onSwiper={setSwiperRef}
         direction={'vertical'}
         slidesPerView={1}
         mousewheel={true}
