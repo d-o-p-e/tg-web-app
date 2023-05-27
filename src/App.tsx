@@ -8,8 +8,6 @@ import KakaoRedirectPage from './pages/redirect/KakaoRedirectPage';
 import CampaignPage from './pages/campaign';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <Providers>
       <BrowserRouter>

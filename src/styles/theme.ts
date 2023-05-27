@@ -12,7 +12,6 @@ export const theme = createTheme({
         body: {
           position: 'relative',
           height: '100%',
-          backgroundColor: blueGrey[50],
         },
         '#root': {
           height: '100%',

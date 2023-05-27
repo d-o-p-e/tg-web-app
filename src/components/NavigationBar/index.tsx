@@ -25,7 +25,7 @@ const NavigationBar: FC<PropsWithChildren> = ({ children }) => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          backgroundColor: blueGrey[300],
+          background: 'linear-gradient(to right, #48a8d8, #BDD7EE )',
           height: '100%',
           color: 'white',
           width: '20%',
@@ -33,7 +33,7 @@ const NavigationBar: FC<PropsWithChildren> = ({ children }) => {
         }}
       >
         <Button sx={{ color: 'white', '&:hover': { backgroundColor: blueGrey[400] } }} onClick={() => navigate('/')}>
-          <h1>Commited</h1>
+          <img src="/src/assets/logo.png" width={100}></img>
         </Button>
         {userInfo ? (
           <>
@@ -48,7 +48,7 @@ const NavigationBar: FC<PropsWithChildren> = ({ children }) => {
                 }}
                 onClick={() => navigate(`/user/${userInfo?.userId}`)}
               >
-                <Avatar sx={{ backgroundColor: blueGrey[100] }}>{userInfo?.nickname[0]}</Avatar>
+                <Avatar sx={{ backgroundColor: blueGrey[100] }} src={userInfo.profileImage}></Avatar>
                 <h3 style={{ marginLeft: '20px' }}>{userInfo?.nickname}</h3>
               </Button>
             </div>
