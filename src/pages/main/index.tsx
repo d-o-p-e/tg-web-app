@@ -5,6 +5,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import FeedPostDialog from '@/components/FeedPostDialog';
 import { useQuery } from '@tanstack/react-query';
 import { getAllFeeds } from '@/apis/feed';
+import BlenderDialog from '@/components/BlenderDialog';
 
 const MainPage = () => {
   const [open, setOpen] = useState(false);
