@@ -9,6 +9,7 @@ import CelebrationIcon from '@mui/icons-material/Celebration';
 import { getUserById } from '@/apis/user';
 
 const kakao = (window as any).Kakao;
+const logoURL = new URL('/src/assets/logo.png', import.meta.url).href;
 
 const NavigationBar: FC<PropsWithChildren> = ({ children }) => {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ const NavigationBar: FC<PropsWithChildren> = ({ children }) => {
         }}
       >
         <Button sx={{ color: 'white', '&:hover': { backgroundColor: blueGrey[400] } }} onClick={() => navigate('/')}>
-          <img src="/src/assets/logo.png" width={100}></img>
+          <img src={logoURL} width={100}></img>
         </Button>
         {userInfo ? (
           <>

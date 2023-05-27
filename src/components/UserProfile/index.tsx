@@ -27,7 +27,7 @@ const UserProfile: FC<UserProfileProps> = ({ toggleDialog, feedData, setClickInd
 
   return (
     <>
-      <Grid container justifyContent="center" sx={{ backgroundColor: blueGrey[50] }}>
+      <Grid container justifyContent="center">
         <Grid container justifyContent="center" sx={{ my: 2 }}>
           <Avatar
             alt={data?.data.nickname?.[0]}
@@ -54,7 +54,7 @@ const UserProfile: FC<UserProfileProps> = ({ toggleDialog, feedData, setClickInd
           </Grid>
         </Grid>
       </Grid>
-      <Grid container spacing={2} sx={{ padding: '50px', backgroundColor: lightBlue[50] }}>
+      <Grid container spacing={2} sx={{ padding: '50px' }}>
         {feedData?.data.map((feed, index) => (
           <Grid
             item
