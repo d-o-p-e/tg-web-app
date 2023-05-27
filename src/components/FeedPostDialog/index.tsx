@@ -13,6 +13,7 @@ import {
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React, { FC, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import LoadingDot from './LoadingDot';
 
 interface FeedPostDialogProps {
   toggleDialog: () => void;
@@ -24,7 +25,7 @@ const FeedPostDialog: FC<FeedPostDialogProps> = ({ toggleDialog, open }) => {
   const [image, setImage] = useState<File | null>();
   const [category, setCategory] = useState<'EARLY_BIRD' | 'WORKOUT'>('EARLY_BIRD');
   const [content, setContent] = useState('');
-  const { mutate } = useMutation(postFeed, {
+  const { mutate, isLoading } = useMutation(postFeed, {
     onSuccess: () => {
       setImage(null);
       setCategory('EARLY_BIRD');
@@ -121,8 +122,18 @@ const FeedPostDialog: FC<FeedPostDialogProps> = ({ toggleDialog, open }) => {
             </RadioGroup>
           </Box>
         </Box>
-        <Button variant="contained" type="submit" sx={{ margin: 'auto', display: 'block', marginBottom: '0.8rem' }}>
-          작성하기
+        <Button
+          variant="contained"
+          type={isLoading ? undefined : 'submit'}
+          sx={{ margin: 'auto', display: 'block', marginBottom: '0.8rem', fontSize: '1.1rem', fontWeight: 700 }}
+        >
+          {!isLoading ? (
+            '작성하기'
+          ) : (
+            <>
+              <LoadingDot />
+            </>
+          )}
         </Button>
       </form>
     </Dialog>

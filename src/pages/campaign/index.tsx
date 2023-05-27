@@ -4,12 +4,15 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { useMutation } from '@tanstack/react-query';
 import { postCampaign } from '@/apis/campaign';
-import { ReactComponent as GiftIcon } from '@/assets/gift.svg';
 import { motion } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
 import { Autoplay } from 'swiper';
+
+const giveaway1 = new URL('/src/assets/giveaway1.jpg', import.meta.url).href;
+const giveaway2 = new URL('/src/assets/giveaway2.jpg', import.meta.url).href;
+const giveaway3 = new URL('/src/assets/giveaway3.jpg', import.meta.url).href;
 
 const CampaignPage = () => {
   const { mutate } = useMutation(postCampaign);
@@ -55,28 +58,28 @@ const CampaignPage = () => {
           style={{ width: '100%' }}
         >
           <SwiperSlide>
-            <img src="/src/assets/giveaway1.jpg" style={{ borderRadius: '20px', width: '90%', objectFit: 'cover' }} />
+            <img src={giveaway1} style={{ borderRadius: '20px', width: '90%', objectFit: 'cover' }} />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="/src/assets/giveaway2.jpg" style={{ borderRadius: '20px', width: '90%', objectFit: 'cover' }} />
+            <img src={giveaway2} style={{ borderRadius: '20px', width: '90%', objectFit: 'cover' }} />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="/src/assets/giveaway3.jpg" style={{ borderRadius: '20px', width: '90%', objectFit: 'cover' }} />
+            <img src={giveaway3} style={{ borderRadius: '20px', width: '90%', objectFit: 'cover' }} />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="/src/assets/giveaway3.jpg" style={{ borderRadius: '20px', width: '90%', objectFit: 'cover' }} />
+            <img src={giveaway3} style={{ borderRadius: '20px', width: '90%', objectFit: 'cover' }} />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="/src/assets/giveaway1.jpg" style={{ borderRadius: '20px', width: '90%', objectFit: 'cover' }} />
+            <img src={giveaway1} style={{ borderRadius: '20px', width: '90%', objectFit: 'cover' }} />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="/src/assets/giveaway2.jpg" style={{ borderRadius: '20px', width: '90%', objectFit: 'cover' }} />
+            <img src={giveaway2} style={{ borderRadius: '20px', width: '90%', objectFit: 'cover' }} />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="/src/assets/giveaway3.jpg" style={{ borderRadius: '20px', width: '90%', objectFit: 'cover' }} />
+            <img src={giveaway3} style={{ borderRadius: '20px', width: '90%', objectFit: 'cover' }} />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="/src/assets/giveaway3.jpg" style={{ borderRadius: '20px', width: '90%', objectFit: 'cover' }} />
+            <img src={giveaway3} style={{ borderRadius: '20px', width: '90%', objectFit: 'cover' }} />
           </SwiperSlide>
         </Swiper>
         <motion.div

@@ -18,7 +18,7 @@ const CommentDialog: FC<CommentDialogProps> = ({ toggleDialog, open, feedId }) =
     setSnackBarOpen((pre) => !pre);
   };
   const { data } = useQuery(['feed', feedId, 'comments'], () => getComments(feedId));
-  const { mutate } = useMutation(postComment, {
+  const { mutate, isLoading } = useMutation(postComment, {
     onSuccess: () => {
       queryClient.invalidateQueries(['feed', feedId, 'comments']);
     },
@@ -45,7 +45,7 @@ const CommentDialog: FC<CommentDialogProps> = ({ toggleDialog, open, feedId }) =
               value={content}
               onChange={(e) => setContent(e.target.value)}
             />
-            <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
+            <IconButton type={isLoading ? undefined : 'submit'} sx={{ p: '10px' }} aria-label="search">
               <SendIcon />
             </IconButton>
           </form>
