@@ -27,6 +27,7 @@ const FeedVerticalSlider: FC<FeedVerticalSliderProps> = ({ feedData = dummyData,
     setSnackBarOpen((pre) => !pre);
   };
   useEffect(() => {
+    console.log(clickIndex);
     clickIndex && slideTo(clickIndex);
   }, [clickIndex]);
   if (feedData === undefined) return <></>;
