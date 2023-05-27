@@ -6,6 +6,10 @@ import { useMutation } from '@tanstack/react-query';
 import { postCampaign } from '@/apis/campaign';
 import { ReactComponent as GiftIcon } from '@/assets/gift.svg';
 import { motion } from 'framer-motion';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+import 'swiper/css';
+import { Autoplay } from 'swiper';
 
 const CampaignPage = () => {
   const { mutate } = useMutation(postCampaign);
@@ -27,7 +31,7 @@ const CampaignPage = () => {
         >
           두근 두근 무엇이 나올까요?
         </Typography>
-        <motion.div
+        {/* <motion.div
           animate={{ rotate: [0, 5, 0, -5, 0], scale: 1 }}
           transition={{
             times: [0, 0.25, 0.5, 0.75, 1],
@@ -36,11 +40,63 @@ const CampaignPage = () => {
           }}
         >
           <GiftIcon width={400} height={400} />
+        </motion.div> */}
+        <Swiper
+          loop={true}
+          spaceBetween={30}
+          autoplay={{
+            delay: 1,
+            disableOnInteraction: false,
+          }}
+          slidesPerView={4}
+          speed={4000}
+          grabCursor={false}
+          modules={[Autoplay]}
+          style={{ width: '100%' }}
+        >
+          <SwiperSlide>
+            <img src="/src/assets/giveaway1.jpg" style={{ borderRadius: '20px', width: '90%', objectFit: 'cover' }} />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="/src/assets/giveaway2.jpg" style={{ borderRadius: '20px', width: '90%', objectFit: 'cover' }} />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="/src/assets/giveaway3.jpg" style={{ borderRadius: '20px', width: '90%', objectFit: 'cover' }} />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="/src/assets/giveaway3.jpg" style={{ borderRadius: '20px', width: '90%', objectFit: 'cover' }} />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="/src/assets/giveaway1.jpg" style={{ borderRadius: '20px', width: '90%', objectFit: 'cover' }} />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="/src/assets/giveaway2.jpg" style={{ borderRadius: '20px', width: '90%', objectFit: 'cover' }} />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="/src/assets/giveaway3.jpg" style={{ borderRadius: '20px', width: '90%', objectFit: 'cover' }} />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="/src/assets/giveaway3.jpg" style={{ borderRadius: '20px', width: '90%', objectFit: 'cover' }} />
+          </SwiperSlide>
+        </Swiper>
+        <motion.div
+          animate={{ rotate: [0, 5, 0, -5, 0], scale: 1 }}
+          transition={{
+            times: [0, 0.25, 0.5, 0.75, 1],
+            repeatDelay: 1.8,
+            repeat: Infinity,
+          }}
+        >
+          <Button
+            variant="contained"
+            size="large"
+            onClick={() => mutate(1)}
+            style={{ marginTop: '30px', fontWeight: 700 }}
+          >
+            경품 응모하기
+          </Button>
         </motion.div>
-        <Button variant="contained" size="large" onClick={() => mutate(1)}>
-          경품 추첨하기
-        </Button>
-        <span style={{ fontSize: '12px' }}>남은 마일리지: 1000</span>
+        <span style={{ fontSize: '12px' }}>남은 마일리지: 1</span>
       </div>
     </>
   );

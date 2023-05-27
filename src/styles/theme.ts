@@ -18,6 +18,9 @@ export const theme = createTheme({
           height: '100%',
           minWidth: '1095px',
         },
+        '.swiper-wrapper': {
+          transitionTimingFunction: 'linear',
+        },
       },
     },
   },

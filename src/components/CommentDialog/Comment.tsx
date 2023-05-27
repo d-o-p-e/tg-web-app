@@ -32,7 +32,13 @@ const Comment: FC<CommentProps> = ({ comment, feedId, toggleSnackBar }) => {
         subheader={dayjs(comment.createdAt).format('YYYY-MM-DD')}
         onClick={() => navigate(`/user/${comment.userId}`)}
         action={
-          <IconButton aria-label="settings" onClick={() => mutate({ commentId: comment.commentId, postId: feedId })}>
+          <IconButton
+            aria-label="settings"
+            onClick={(e) => {
+              e.stopPropagation();
+              mutate({ commentId: comment.commentId, postId: feedId });
+            }}
+          >
             <DeleteIcon />
           </IconButton>
         }
