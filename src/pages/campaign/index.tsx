@@ -90,7 +90,7 @@ const CampaignPage = () => {
           <Button
             variant="contained"
             size="large"
-            onClick={() => mutate(1)}
+            onClick={() => mutate()}
             style={{ marginTop: '30px', fontWeight: 700 }}
           >
             경품 응모하기
