@@ -61,7 +61,6 @@ const UserProfile: FC<UserProfileProps> = ({ toggleDialog, feedData, setClickInd
             md={3}
             sx={{ cursor: 'pointer', aspectRatio: 1 / 1 }}
             onClick={() => {
-              console.log(index);
               setClickIndex(index);
               toggleDialog();
             }}
