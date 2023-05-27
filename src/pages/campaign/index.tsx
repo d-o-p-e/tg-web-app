@@ -2,8 +2,8 @@ import { Alert, Button, Card, CardContent, CardMedia, Divider, Grid, Snackbar, T
 import React, { useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { useMutation } from '@tanstack/react-query';
-import { postCampaign } from '@/apis/campaign';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { getMileage, postCampaign } from '@/apis/campaign';
 import { motion } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -16,17 +16,21 @@ const giveaway2 = new URL('/src/assets/giveaway2.jpg', import.meta.url).href;
 const giveaway3 = new URL('/src/assets/giveaway3.jpg', import.meta.url).href;
 
 const CampaignPage = () => {
+  const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
   const [errorOpen, setErrorOpen] = useState(false);
   const { mutate } = useMutation(postCampaign, {
-    onSuccess: () => {
+    onSuccess: (data) => {
       setOpen(true);
+      queryClient.setQueryData(['campaign', 'mileage'], data.data.mileage);
     },
     onError: () => {
       setErrorOpen(true);
     },
   });
+  const { data } = useQuery(['campaign', 'mileage'], getMileage);
+  const mileage = data?.data?.mileage;
   const toggleDialog = () => {
     setOpen((pre) => !pre);
     toggleInfoDialog();
@@ -107,12 +111,12 @@ const CampaignPage = () => {
             variant="contained"
             size="large"
             onClick={() => mutate()}
-            style={{ marginTop: '30px', fontWeight: 700 }}
+            style={{ marginTop: '30px', fontWeight: 700, fontSize: '18px' }}
           >
             경품 응모하기
           </Button>
         </motion.div>
-        <span style={{ fontSize: '12px' }}>남은 마일리지: 1</span>
+        <span style={{ fontSize: '12px', marginTop: '6px', color: 'gray' }}>남은 응모권: {mileage}</span>
       </div>
       <BlenderDialog open={open} toggleDialog={toggleDialog}>
         <h1

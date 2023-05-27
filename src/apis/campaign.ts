@@ -7,3 +7,7 @@ export const postCampaign = () => {
 export const postCampaignById = (campaignId: number) => {
   return api.post(`/campaign/${campaignId}`);
 };
+
+export const getMileage = () => {
+  return api.get(`/campaign/mileage`);
+};

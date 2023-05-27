@@ -17,7 +17,7 @@ interface FeedVerticalSliderProps {
   feedData: Post[] | undefined;
   clickIndex?: number;
 }
-const FeedVerticalSlider: FC<FeedVerticalSliderProps> = ({ feedData = dummyData, clickIndex }) => {
+const FeedVerticalSlider: FC<FeedVerticalSliderProps> = ({ feedData, clickIndex }) => {
   const [snackBarOpen, setSnackBarOpen] = useState(false);
   const [swiperRef, setSwiperRef] = useState<SwiperClass | undefined>(undefined);
   const slideTo = (index: number) => {
