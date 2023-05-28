@@ -33,7 +33,6 @@ const CampaignPage = () => {
     },
   });
   const { data } = useQuery(['campaign', 'mileage'], getMileage);
-  console.log(data);
   const mileage = data?.data?.amount;
   const toggleDialog = () => {
     setOpen((pre) => !pre);

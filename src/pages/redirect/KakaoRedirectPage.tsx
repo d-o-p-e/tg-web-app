@@ -7,7 +7,6 @@ const KakaoRedirectPage = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const accessToken = searchParams.get('code');
-  console.log(accessToken);
   const queryClient = useQueryClient();
   const { data, refetch } = useQuery(['kakao', 'code'], () => getAccessTokenWIthKakao(accessToken), {
     onSuccess: (data) => {

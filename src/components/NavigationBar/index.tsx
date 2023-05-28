@@ -16,7 +16,6 @@ const NavigationBar: FC<PropsWithChildren> = ({ children }) => {
   const { data, isLoading } = useQuery(['user', 'me'], () => getUserById(0));
   let userInfo = data?.data;
   const queryClient = useQueryClient();
-  console.log(queryClient.getQueryData(['kakao', 'code']));
   if (isLoading) return <></>;
   return (
     <>
