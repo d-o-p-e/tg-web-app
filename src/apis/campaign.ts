@@ -9,5 +9,5 @@ export const postCampaignById = (campaignId: number) => {
 };
 
 export const getMileage = () => {
-  return api.get(`/campaign/mileage`);
+  return api.get<{ amount: number }>(`/campaign/mileage`);
 };

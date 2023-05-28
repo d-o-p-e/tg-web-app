@@ -10,7 +10,7 @@ const clapMotion = new URL('/src/assets/clap_motion.mp4', import.meta.url).href;
 const BlenderDialog: FC<BlenderDialogProps> = ({ open, children, toggleDialog }) => {
   return (
     <Dialog open={open} onClose={toggleDialog}>
-      <div style={{ backgroundColor: '#B8B6BA', padding: '1rem' }}>
+      <div style={{ backgroundColor: '#D6D6D6', padding: '1rem' }}>
         <video autoPlay loop muted playsInline>
           <source src={clapMotion} type="video/mp4" />
         </video>

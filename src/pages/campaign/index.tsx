@@ -23,14 +23,15 @@ const CampaignPage = () => {
   const { mutate } = useMutation(postCampaign, {
     onSuccess: (data) => {
       setOpen(true);
-      queryClient.setQueryData(['campaign', 'mileage'], data.data.mileage);
+      queryClient.setQueryData(['campaign', 'mileage'], data.data.amount);
     },
     onError: () => {
       setErrorOpen(true);
     },
   });
   const { data } = useQuery(['campaign', 'mileage'], getMileage);
-  const mileage = data?.data?.mileage;
+  console.log(data);
+  const mileage = data?.data?.amount;
   const toggleDialog = () => {
     setOpen((pre) => !pre);
     toggleInfoDialog();
@@ -118,7 +119,7 @@ const CampaignPage = () => {
         </motion.div>
         <span style={{ fontSize: '12px', marginTop: '6px', color: 'gray' }}>남은 응모권: {mileage}</span>
       </div>
-      <BlenderDialog open={open} toggleDialog={toggleDialog}>
+      <BlenderDialog open={true} toggleDialog={toggleDialog}>
         <h1
           style={{
             margin: 0,
