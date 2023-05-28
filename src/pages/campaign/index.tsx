@@ -23,10 +23,7 @@ const CampaignPage = () => {
   const { mutate } = useMutation(postCampaign, {
     onSuccess: (data) => {
       setOpen(true);
-      queryClient.setQueryData(
-        ['campaign', 'mileage'],
-        (queryClient.getQueryData(['campaign', 'mileage']) as { amount: number }).amount - 1
-      );
+      queryClient.invalidateQueries(['campaign', 'mileage']);
     },
     onError: () => {
       setErrorOpen(true);
