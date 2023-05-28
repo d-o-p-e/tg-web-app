@@ -119,7 +119,7 @@ const CampaignPage = () => {
         </motion.div>
         <span style={{ fontSize: '12px', marginTop: '6px', color: 'gray' }}>남은 응모권: {mileage}</span>
       </div>
-      <BlenderDialog open={true} toggleDialog={toggleDialog}>
+      <BlenderDialog open={open} toggleDialog={toggleDialog}>
         <h1
           style={{
             margin: 0,
