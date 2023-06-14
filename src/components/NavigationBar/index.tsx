@@ -11,6 +11,7 @@ import { getUserById } from '@/apis/user';
 const kakao = (window as any).Kakao;
 const logoURL = new URL('/src/assets/logo.png', import.meta.url).href;
 
+// 네비게이션 바
 const NavigationBar: FC<PropsWithChildren> = ({ children }) => {
   const navigate = useNavigate();
   const { data, isLoading } = useQuery(['user', 'me'], () => getUserById(0));

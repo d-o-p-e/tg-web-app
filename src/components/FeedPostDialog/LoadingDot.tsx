@@ -43,6 +43,7 @@ const DotTransition = {
   ease: 'easeInOut',
 } as const;
 
+// 로딩 도트 컴포넌트
 export default function LoadingDot() {
   return (
     <div style={{ display: 'inline-block', width: '100%' }}>

@@ -1,6 +1,7 @@
 import { Box, Dialog } from '@mui/material';
 import React, { FC, ReactNode } from 'react';
 
+// 블랜더 다이얼로그 컴포넌트
 interface BlenderDialogProps {
   open: boolean;
   toggleDialog: () => void;

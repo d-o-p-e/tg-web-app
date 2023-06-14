@@ -21,6 +21,8 @@ interface FeedPostDialogProps {
   open: boolean;
 }
 
+// 피드 작성 다이얼로그 컴포넌트
+
 const FeedPostDialog: FC<FeedPostDialogProps> = ({ toggleDialog, open }) => {
   const queryClient = useQueryClient();
   const [blenderEarlyBirdOpen, setBlenderEarlyBirdOpen] = useState(false);

@@ -21,6 +21,7 @@ interface UserProfileProps {
   setClickIndex: (index: number) => void;
 }
 
+// 유저의 프로필을 보여주는 컴포넌트
 const UserProfile: FC<UserProfileProps> = ({ toggleDialog, feedData, setClickIndex }) => {
   const params = useParams();
   const { data } = useQuery(['user', Number(params.id)], () => getUserById(Number(params.id)));

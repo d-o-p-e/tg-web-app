@@ -9,6 +9,7 @@ import BlenderDialog from '@/components/BlenderDialog';
 
 const MainPage = () => {
   const [open, setOpen] = useState(false);
+  // 게시글 작성창 오픈 여부
 
   const toggleDialog = () => {
     setOpen((pre) => !pre);

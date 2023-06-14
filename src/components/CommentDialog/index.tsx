@@ -10,6 +10,7 @@ interface CommentDialogProps {
   feedId: number;
 }
 
+// 댓글 다이얼로그
 const CommentDialog: FC<CommentDialogProps> = ({ toggleDialog, open, feedId }) => {
   const queryClient = useQueryClient();
   const [content, setContent] = useState('');

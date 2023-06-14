@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Card, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 
+// 기부물품 아이템
 const GiveAwayItem = () => {
   return (
     <Card sx={{ margin: '10px', padding: '20px' }}>

@@ -15,11 +15,15 @@ const giveaway1 = new URL('/src/assets/giveaway1.jpg', import.meta.url).href;
 const giveaway2 = new URL('/src/assets/giveaway2.jpg', import.meta.url).href;
 const giveaway3 = new URL('/src/assets/giveaway3.jpg', import.meta.url).href;
 
+// 캠페인 페이지
 const CampaignPage = () => {
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
+  // 블랜더창 오픈 여부
   const [infoOpen, setInfoOpen] = useState(false);
+  // 정보창 오픈 여부
   const [errorOpen, setErrorOpen] = useState(false);
+  // 에러창 오픈 여부
   const { mutate } = useMutation(postCampaign, {
     onSuccess: (data) => {
       setOpen(true);
@@ -29,7 +33,9 @@ const CampaignPage = () => {
       setErrorOpen(true);
     },
   });
+  // 캠페인 참여
   const { data } = useQuery(['campaign', 'mileage'], getMileage);
+  // 마일리지 조회
   const mileage = data?.data?.amount;
   const toggleDialog = () => {
     setOpen((pre) => !pre);

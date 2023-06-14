@@ -8,6 +8,7 @@ interface ProfileBadgeProps {
   count?: number;
 }
 
+// 프로필 뱃지 컴포넌트
 const ProfileBadge: FC<ProfileBadgeProps> = ({ name, count }) => {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

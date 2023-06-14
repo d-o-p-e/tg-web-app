@@ -34,6 +34,7 @@ interface FeedProps {
   toggleSnackBar: () => void;
 }
 
+// 피드 컴포넌트
 export default function Feed({ feed, toggleSnackBar }: FeedProps) {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);

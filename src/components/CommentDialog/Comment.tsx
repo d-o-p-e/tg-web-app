@@ -15,6 +15,7 @@ interface CommentProps {
   toggleSnackBar: () => void;
 }
 
+// 댓글 컴포넌트
 const Comment: FC<CommentProps> = ({ comment, feedId, toggleSnackBar }) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();

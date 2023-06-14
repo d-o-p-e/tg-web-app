@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+// 유저의 프로필을 보여주는 페이지
 const UserPage = () => {
   const params = useParams();
   const [open, setOpen] = useState(false);
@@ -14,6 +15,7 @@ const UserPage = () => {
     setOpen((pre) => !pre);
   };
   const { data: feedData } = useQuery(['user', 'feeds', Number(params.id)], () => getFeedsByUserId(Number(params.id)));
+  // 해당 유저의 게시글을 가져옴
   return (
     <>
       <UserProfile toggleDialog={toggleDialog} feedData={feedData} setClickIndex={setClickIndex} />
@@ -24,5 +26,4 @@ const UserPage = () => {
   );
 };
 
-// 기상 미션, 운동, 코딩테스트 몇번 성공 연속몇일
 export default UserPage;

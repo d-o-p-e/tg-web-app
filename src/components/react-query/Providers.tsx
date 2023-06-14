@@ -5,6 +5,7 @@ interface Props {
   children: ReactNode;
 }
 
+// react-query의 Provider 컴포넌트
 const Providers: FC<Props> = ({ children }) => {
   const queryClient = new QueryClient({
     defaultOptions: {
